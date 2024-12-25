@@ -1,1 +1,1 @@
-from mystructures.stack.statictypestack.StaticTypeStack import StaticTypeStack
+from mystructures.stacks.statictypestack.StaticTypeStack import StaticTypeStack

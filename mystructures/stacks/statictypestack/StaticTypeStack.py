@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from mystructures.stack.Node import Node
+from mystructures.stacks.Node import Node
 from typing import Any
 
 @dataclass
