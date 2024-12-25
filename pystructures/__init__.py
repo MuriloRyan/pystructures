@@ -1,1 +1,0 @@
-from pystructures.stack.statictypestack.StaticTypeStack import StaticTypeStack

@@ -1,4 +1,4 @@
-from pystructures import StaticTypeStack
+from mystructures import StaticTypeStack
 import pytest
 
 def test_push_correct_type():

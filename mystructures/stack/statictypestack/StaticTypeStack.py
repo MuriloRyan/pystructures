@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from pystructures.stack.Node import Node
+from mystructures.stack.Node import Node
 from typing import Any
 
 @dataclass
