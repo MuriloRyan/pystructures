@@ -1,5 +1,3 @@
-#Used for the list of notes
-
 class Node:
     def __init__(self, data, bits=16):
         self.data = data
@@ -57,17 +55,24 @@ class CircularLinkedList:
     
     def __iter__(self):
         self._iter_current_node = self.root
+        self._iter_started = False
         return self
 
     def __next__(self):
-        if self._iter_current_node.next != self.root:
-            node = self._iter_current_node
-            self._iter_current_node = self._iter_current_node.next
+        if self._iter_current_node is None:
+            raise StopIteration
 
-            return node
+        if not self._iter_started:
+            self._iter_started = True
+            return self._iter_current_node
+
+        self._iter_current_node = self._iter_current_node.next
+
+        if self._iter_current_node == self.root:
+            raise StopIteration
+
+        return self._iter_current_node
         
-        raise StopIteration
-
     def __repr__(self):
         object_list = []
 
