@@ -1,15 +1,9 @@
-class Node:
-    def __init__(self, data, bits=16):
-        self.data = data
-        self.next = None
-
-    def __str__(self):
-        return str(self.data)
-
-""" This list only use things I need"""
+from operator import length_hint
+from platform import node
+from mystructures.linkedlist.Node import Node
 
 class CircularLinkedList:
-    def __init__(self, node_class=Node):
+    def __init__(self):
         self.root = None
 
     def append(self, data):
@@ -27,6 +21,30 @@ class CircularLinkedList:
             
             current_node.next = new_node
             new_node.next = self.root
+    
+    def pop(self):
+        if not self.root:
+            raise IndexError('pop from empty linkedlist')
+        
+        current_node = self.root
+
+        if self.root.next == self.root:
+            self.root = None
+            return current_node
+        
+        if len(self) == 2:
+            deleted_node = current_node.next
+            current_node.next = current_node
+
+            return deleted_node
+
+        while current_node.next.next != self.root:
+            current_node = current_node.next
+        
+        last_node = current_node.next
+        current_node.next = self.root
+    
+        return last_node
     
     def find_one(self, data):
         current_node = self.root
@@ -53,6 +71,13 @@ class CircularLinkedList:
 
         return node
     
+    def __len__(self):
+        length = 0
+        for i in self:
+            length += 1
+
+        return length
+    
     def __iter__(self):
         self._iter_current_node = self.root
         self._iter_started = False
@@ -74,15 +99,16 @@ class CircularLinkedList:
         return self._iter_current_node
         
     def __repr__(self):
-        object_list = []
+        if len(self) >= 1:
+            object_list = []
 
-        current_node = self.root
-        while True:
-            object_list.append(str(current_node))
-            print(current_node)
+            current_node = self.root
+            while True:
+                object_list.append(str(current_node))
 
-            current_node = current_node.next
-            if current_node == self.root:
-                break
+                current_node = current_node.next
+                if current_node == self.root:
+                    break
 
-        return f'Circular{str(object_list)}'
+            return f'Circular{str(object_list)}'
+        return f'Circular[]'
